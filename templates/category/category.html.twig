@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <h1>Catégories</h1>
+    <div class="row g-4">
+        {% if all_categories is defined %}
+            {% for category in all_categories %}
+            <div class="col">
+                <div class="card">
+                    <img src="https://cdn.pixabay.com/photo/2022/10/15/14/55/ornamental-plant-7523304_960_720.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h2 class="card-title">{{category.name}}</h2>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div> 
+</section>
+
+{% endblock %}
