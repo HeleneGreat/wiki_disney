@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block body %}
+<section class="container">
+    <h1>Ajouter un article</h1>
+    <div class="w-50 center">
+        {{form(articleForm)}}
+    </div>
+</section>
+{% endblock %}

@@ -10,7 +10,9 @@ use App\Entity\Category;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'category-list')]
+
+    // List of all categories
+    #[Route('/category', name: 'category_list')]
     public function categoryList(ManagerRegistry $doctrine): Response
     {
         $allCategories = $doctrine->getRepository(Category::class)->findAll();
@@ -21,8 +23,9 @@ class CategoryController extends AbstractController
     }
 
 
-
-    #[Route('/category/init', name: 'category-init')]
+    // INIT THE CATEGORY TABLE IN DB 
+    // Only do it once
+    #[Route('/category/init', name: 'category_init')]
     public function categoryInit(ManagerRegistry $doctrine): Response
     {
         // Princes & princesses
