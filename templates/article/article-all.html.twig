@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les articles{% endblock %}
+
+{% block body %}
+<section class="container">
+    <h1>Articles</h1>
+    <div class="row g-4">
+        {% if all_articles is defined %}
+            {% for article in all_articles %}
+            <div class="col-6 col-md-3">
+                <a href="{{path('one_article', {articleId:article.id})}}">
+                    <div class="card">
+                        <img src="{{asset('images/')}}{{article.picture}}" class="card-img-top" alt="{{article.title}}">
+                        <div class="card-body">
+                            <h2 class="card-title">{{article.title}}</h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div> 
+</section>
+
+{% endblock %}

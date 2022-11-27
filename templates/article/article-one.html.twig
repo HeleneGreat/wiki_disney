@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block body %}
+
+<section class="container row">
+    <!-- article header -->
+    <article class="col-12 col-md-8">
+        <h1 class="my-4">{{article.title}}</h1>
+        <hr/>
+    </article>
+    <!-- end of article header -->
+    
+    <!-- sidebar -->
+    <article class="col-12 col-md-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <h6>{{article.title}}</h6>
+            </div>
+            <img src="{{asset('images/')}}{{article.picture}}" alt="{{article.title}}" class="mx-auto my-2 px-5 w-100">
+            <table class="table table-bordered mb-0 d-flex" style="font-size:12px">
+                <tr>
+                    <th class="col-4">Résumé</th>
+                    <td>{{article.summary}}</td>
+                </tr>
+                <tr>
+                    <th class="col-4"><a href="{{path('category_list')}}" title="Toutes les catégories">Catégories</a></th>
+                    <td>
+                        <ul>
+                            {% for category in article.category %}
+                                {# TODO : ajouter lien vers la page de la catégorie une fois que la route aura été créée #}
+                                {#<li><a href="{{path('one_category', {categoryId:category.id})}}">category.name</a></li>#}
+                                <li><a href="">{{category.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col-4">Auteur</th>
+                    <td><span style="word-break: break-all;">
+                        {# TODO : ajouter lien vers la page avec la liste de tous les articles écrits par ce user quand la route aura été créée #}
+                        <a href="">AUTEUR</a></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </article>
+    <!--end of sidebar-->
+
+
+
+    <!-- main article -->
+    <article>
+        <!-- TODO ajouter les liens de modification et suppression SI l'utilisateur est l'auteur -->
+        <h2 class="d-inline">Histoire </h2><small>[<a href="#">Modifier l'article</a> | <a href="#">Supprimer l'article</a>]</small>
+        <hr/>
+        <p class="article-content">{{article.content}}</p>
+        <hr/>
+    </article>
+    <!-- end of main article -->
+
+</section>
+{% endblock %}
