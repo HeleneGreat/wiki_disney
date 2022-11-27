@@ -19,10 +19,27 @@ class ArticleController extends AbstractController
     public function articleList(ManagerRegistry $doctrine): Response
     {
         $allArticles = $doctrine->getRepository(Article::class)->findAll();
-        return $this->render('article/article.html.twig', [
+        return $this->render('article/article-all.html.twig', [
             'all_articles' => $allArticles,
         ]);
     }
+
+    // Detail page of 1 article
+    #[Route('/article/{articleId}', name: 'one_article', requirements: ['articleId' => '\d+'])]
+    public function oneArticle(ManagerRegistry $doctrine, int $articleId, Request $request): Response
+    {
+        $article = $doctrine->getRepository(Article::class)->findOneBy(['id' => $articleId]);
+        if(!$article){
+            throw $this->createNotFoundException(
+                'Aucun article ne correspond à cette URL.'
+            );
+        }
+        return $this->render('article/article-one.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+
 
     // Form to add a new article
     #[Route('/article/add', name: 'article_add', requirements:['add' => 'a-zA-Z'])]
@@ -40,7 +57,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('article_list');
         }
         
-        return $this->renderForm('article/add-article.html.twig', [
+        return $this->renderForm('article/article-add.html.twig', [
             'all_categories' => $allCategories,
             'articleForm' => $form
         ]);
