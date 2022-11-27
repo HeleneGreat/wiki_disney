@@ -1,0 +1,27 @@
+{{include('layouts/header.html.twig')}}
+
+{% block title %}Espace d'inscription{% endblock %}
+
+{% block body %}
+    <section class="container">
+    <h1>Espace d'inscription</h1>
+        <div class="row">
+            <div class="col">
+                 {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    {{ form_row(registrationForm.pseudo) }}
+                    {{ form_row(registrationForm.image) }}
+                    {{ form_row(registrationForm.RGPDConsent) }}
+
+                    <button type="submit" class="btn btn-primary">Créer mon compte</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </section>
+
+   
+{% endblock %}
+{{include('layouts/footer.html.twig')}}
