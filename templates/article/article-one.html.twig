@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{{include('layouts/header.html.twig')}}
 
 {% block title %}{{article.title}}{% endblock %}
 
@@ -62,3 +62,4 @@
 
 </section>
 {% endblock %}
+{{include('layouts/footer.html.twig')}}
