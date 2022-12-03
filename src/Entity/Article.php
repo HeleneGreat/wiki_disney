@@ -31,6 +31,13 @@ class Article
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'article')]
     private Collection $category;
 
+    #[ORM\Column(length: 255)]
+    private ?string $movie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'author')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -109,6 +116,30 @@ class Article
     public function removeCategory(category $category): self
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    public function getMovie(): ?string
+    {
+        return $this->movie;
+    }
+
+    public function setMovie(string $movie): self
+    {
+        $this->movie = $movie;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

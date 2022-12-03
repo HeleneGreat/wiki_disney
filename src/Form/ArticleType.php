@@ -24,6 +24,9 @@ class ArticleType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => "Titre de l'article",
             ])
+            ->add('movie', TextType::class, [
+                'label' => "Dessin animé",
+            ])
             ->add('summary', TextareaType::class, [
                 'label' => "Résumé de l'article"
             ])
@@ -38,6 +41,7 @@ class ArticleType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'choice_label' => 'name',
+                'label' => 'Catégorie(s) :',
                 
             ])
             ->add('Publier', SubmitType::class)

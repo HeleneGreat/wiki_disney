@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+<section id="dashboard" class="container">
+    <h1 class="text-center">Bienvenue {{app.user.pseudo}}</h1>
+
+    
+
+    <div class="row">
+        {% for article in articles %}
+        <article class="col-12 col-lg-6 my-2">
+            <div class="row h-100 p-2 m-1 bg-white border rounded">
+                <div class="col-md-3">
+                    <img class="img-fluid img-thumbnail rounded-circle product-image" 
+                        src="{{asset('images/')}}{{article.picture}}" alt="{{article.title}}">
+                </div>
+                <div class="col-md-6">
+                    <h3>{{article.title}}</h3>
+                    <p class="text-justify text-truncate para mb-0">{{article.movie}}</p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left">
+                    <a href="#" class="btn btn-primary ">Modifier</a>
+                    <a href="#" class="btn btn-outline-primary">Supprimer</a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<a href="{{path('article_add')}}" title="Ajouter un article" class="btn btn-primary btn-floating rounded-circle">
+    <i class="fas fa-plus"></i>
+</a>
+  
+<div><a href="" title="Ajouter un article"></a></div>
+
+{% endblock %}
