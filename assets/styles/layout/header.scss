@@ -1,11 +1,17 @@
 
 
-body {
-    background-color: $primary-color;
-    @include media-breakpoint-up(md){
-        background-color: $secondary-color;
+header{
+    background-color: $background;
+    .baniere{
+        font-family: 'Mouse Memoirs', sans-serif;
+        font-size: 5em;
+        color: $title;
     }
-    @include media-breakpoint-up(xl){
-        background-color: rgb(0, 187, 255);
+    
+   
+    .castle{
+        text-align: center;
+        width: 30%;
     }
+ 
 }
