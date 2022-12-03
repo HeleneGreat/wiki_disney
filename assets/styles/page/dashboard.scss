@@ -1,0 +1,17 @@
+#dashboard{
+    article{
+        height: 130px;
+        img{
+            height: 112px;
+            width: 112px;
+            object-fit: cover;
+        }
+    }
+}
+
+
+.btn-floating{
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+}

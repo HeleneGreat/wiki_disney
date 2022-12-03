@@ -45,10 +45,15 @@ class ArticleController extends AbstractController
     #[Route('/article/add', name: 'article_add', requirements:['add' => 'a-zA-Z'])]
     public function createArticle(ManagerRegistry $doctrine, Request $request):Response
     {
+        // User must be registered to access this page
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+
         $allCategories = $doctrine->getRepository(Category::class)->findAll();
         $article = new Article();
+        $article->setAuthor($this->getUser());
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
             $article = $form->getData();
             $entityManager = $doctrine->getManager();
