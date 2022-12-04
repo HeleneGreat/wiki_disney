@@ -19,6 +19,23 @@
     </head>
     <body>
         {{include('layouts/header.html.twig')}}
+
+        {# read and display all flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ label }} rounded">
+                    {% if label == "error" %}
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    {% elseif label == "warning" %}
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    {% else %}
+                    <i class="fa-solid fa-circle-check"></i>
+                    {% endif %}
+                     {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         <main>
             {% block body %}{% endblock %}
         </main>
