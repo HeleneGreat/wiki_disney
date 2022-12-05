@@ -8,7 +8,7 @@
     <div class="row g-4">
         {% if all_articles is defined %}
             {% for article in all_articles %}
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md-3 h-100">
                 <a href="{{path('one_article', {articleId:article.id})}}">
                     <div class="card">
                         <img src="{{asset('images/')}}{{article.picture}}" class="card-img-top" alt="{{article.title}}">
