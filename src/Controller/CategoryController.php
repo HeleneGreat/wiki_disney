@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
+use App\Entity\Article;
+use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractController
 {
@@ -21,6 +23,22 @@ class CategoryController extends AbstractController
             'all_categories' => $allCategories,
         ]);
     }
+
+    // Category page = list of all article from one category
+    #[Route('/category/{categoryId}', name: 'one_category', requirements:['categoryId' => '\d+'])]
+    public function oneCategory(CategoryRepository $categoryRepository, int $categoryId): Response
+    {
+        $category = $categoryRepository->findOneBy(['id' => $categoryId]);
+        $categoryArticles = $category->getArticle();
+
+        return $this->render('category/category-one.html.twig', [
+            'category' => $category,
+            'category_articles' => $categoryArticles,
+        ]);
+    }
+
+
+
 
 
     // INIT THE CATEGORY TABLE IN DB 
