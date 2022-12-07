@@ -20,12 +20,11 @@
 							Catégories
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% for category in categories %}
 							<li>
-								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="{{ path('one_category', {categoryId:category.id})}}">{{category.name}}</a>
 							</li>
-							<li>
-								<a class="dropdown-item" href="#">Another action</a>
-							</li>
+							{% endfor %}
 							<li><hr class="dropdown-divider"></li>
 							<li>
 								<a class="dropdown-item" href="{{ path('category_list') }}">Toutes les catégories</a>
