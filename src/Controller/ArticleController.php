@@ -41,7 +41,7 @@ class ArticleController extends AbstractController
     }
 
     //Function to edit one article from dashboard
-    #[Route('/article/edit/{articleId}', name: 'article_edit', requirements: ['articleId' => '\d+'])]
+    #[Route('/article/{articleId}/edit/', name: 'article_edit', requirements: ['articleId' => '\d+'])]
     public function articleEdit(int $articleId, ManagerRegistry $doctrine, Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
