@@ -17,14 +17,10 @@ class CategoryController extends AbstractController
     #[Route('/category', name: 'category_list')]
     public function categoryList(ManagerRegistry $doctrine): Response
     {
-        $allCategories = $doctrine->getRepository(Category::class)->findAll();
-
-        return $this->render('category/category-all.html.twig', [
-            'all_categories' => $allCategories,
-        ]);
+        return $this->render('category/category-all.html.twig', []);
     }
 
-    // Category page = list of all article from one category
+    // Category page = list of all articles from one category
     #[Route('/category/{categoryId}', name: 'one_category', requirements:['categoryId' => '\d+'])]
     public function oneCategory(CategoryRepository $categoryRepository, int $categoryId): Response
     {

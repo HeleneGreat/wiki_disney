@@ -7,8 +7,8 @@
 <section class="container">
     <h1>Catégories</h1>
     <div class="row g-4">
-        {% if all_categories is defined %}
-            {% for category in all_categories %}
+        {% if categories is defined %}
+            {% for category in categories %}
             <div class="col-6 col-md-3">
                 <a href="{{path('one_category', {categoryId:category.id})}}">
                     <div class="card">

@@ -34,11 +34,9 @@
                     <tr>
                         <th class="col-4"><a href="{{path('category_list')}}" title="Toutes les catégories">Catégories</a></th>
                         <td>
-                            <ul>
+                            <ul class="p-0">
                                 {% for category in article.category %}
-                                    {# TODO : ajouter lien vers la page de la catégorie une fois que la route aura été créée #}
-                                    {#<li><a href="{{path('one_category', {categoryId:category.id})}}">category.name</a></li>#}
-                                    <li><a href="">{{category.name}}</a></li>
+                                    <li><a href="{{path('one_category', {categoryId:category.id})}}">{{category.name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </td>
