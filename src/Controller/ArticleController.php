@@ -125,26 +125,54 @@ class ArticleController extends AbstractController
         }
     }
 
-    // Delete one article if the current user is the author of the article
-    #[Route('/article/{articleId}/delete', name: 'delete_article', requirements: ['articleId' => '\d+'])]
-    public function deleteArticle(ManagerRegistry $doctrine, int $articleId):Response
+
+
+
+
+    // Delete one article from the wiki
+    #[Route('/article/{articleId}/delete', name: 'article_delete_wiki', requirements:['articleId' => '\d+'])]
+    public function deleteArticleFromWiki(int $articleId, ManagerRegistry $doctrine)
+    {
+        $this->deleteArticle($articleId, $doctrine);
+        return $this->redirectToRoute('article_list');
+    }
+
+    // Delete one article from dashboard
+    #[Route('/dashboard/{articleId}/delete/', name: 'article_delete_dashboard', requirements: ['articleId' => '\d+'])]
+    public function deleteArticleFromDashboard(int $articleId, ManagerRegistry $doctrine)
+    {
+        $this->deleteArticle($articleId, $doctrine);
+        return $this->redirectToRoute('dashboard');
+    }
+
+
+
+    // Delete one article
+    public function deleteArticle(int $articleId, ManagerRegistry $doctrine)
     {
         $article = $doctrine->getRepository(Article::class)->find($articleId);
-        if($this->getUser() == $article->getAuthor()){
-            $entityManager = $doctrine->getManager();
-            $entityManager->remove($article);
-            $entityManager->flush();
-            $this->addFlash(
-                "notice",
-                "L'article a été supprimé"
-            );
-            return $this->redirectToRoute('article_list');
-        }else{
+        // If no article matches the id
+        if(!$article){
             $this->addFlash(
                 "error",
-                "Vous n'avez pas les droits pour effectuer cette action"
+                "Aucun article ne correspond à cette adresse."
             );
-            return $this->redirectToRoute('one_article', ['articleId' => $articleId]);
+        }else{
+            // If the user is the article's author
+            if($this->getUser() == $article->getAuthor()){
+                $entityManager = $doctrine->getManager();
+                $entityManager->remove($article);
+                $entityManager->flush();
+                $this->addFlash(
+                    "success",
+                    "L'article a été supprimé"
+                );
+            }else{
+                $this->addFlash(
+                    "error",
+                    "Vous n'avez pas les droits pour effectuer cette action"
+                );
+            }
         }
     }
  
