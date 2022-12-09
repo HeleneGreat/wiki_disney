@@ -10,7 +10,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Form\ArticleType;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ArticleController extends AbstractController
 {
@@ -42,33 +41,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    //Function to edit one article from dashboard
-    #[Route('/article/{articleId}/edit/', name: 'article_edit', requirements: ['articleId' => '\d+'])]
-    public function articleEdit(int $articleId, ManagerRegistry $doctrine, Request $request)
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-        
-        $allCategories = $doctrine->getRepository(Category::class)->findAll();
-        $article = $doctrine->getRepository(Article::class)->find($articleId);
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($article);
-            $entityManager->flush();
-            $this->addFlash("success","L'article a été modifié");
-            return $this->redirectToRoute('dashboard');
-        }
-        
-        return $this->renderForm('article/article-edit.html.twig', [
-            'articleId' => $articleId,
-            'all_categories' => $allCategories,
-            'articleForm' => $form
-        ]);
-    }
-
     // Form to add a new article
     #[Route('/article/add', name: 'article_add', requirements:['add' => 'a-zA-Z'])]
     public function createArticle(ManagerRegistry $doctrine, Request $request):Response
@@ -95,59 +67,114 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    //  TODO SEUL AUTEUR PEUT MODIFIER
-    // Form to modify an article
-    #[Route('/article/{articleId}/modify', name: 'article_modify', requirements:['articleId' => '\d+'])]
-    public function modifyArticle(ManagerRegistry $doctrine, int $articleId, Request $request):Response
+    // Update one article from the wiki
+    #[Route('/article/{articleId}/update', name: 'article_update_wiki', requirements:['articleId' => '\d+'])]
+    public function updateArticleFromWiki(int $articleId, ManagerRegistry $doctrine, Request $request)
+    {
+        $response = $this->updateArticle($articleId, $doctrine, $request);
+        if($response == "successful-update" || $response = "notAuthor"){
+            return $this->redirectToRoute('one_article', ['articleId' => $articleId]);
+        }elseif($response == "invalid_id"){
+            return $this->redirectToRoute('article_list');
+        }else{
+            return $response;
+        }
+    }
+
+    // Update one article from dashboard
+    #[Route('/dashboard/{articleId}/update/', name: 'article_update_dashboard', requirements: ['articleId' => '\d+'])]
+    public function updateArticleFromDashboard(int $articleId, ManagerRegistry $doctrine, Request $request)
+    {
+        $response = $this->updateArticle($articleId, $doctrine, $request);
+        if($response == "successful-update" || $response == "invalid_id" || $response = "notAuthor"){
+            return $this->redirectToRoute('dashboard');
+        }else{
+            return $response;
+        }
+    }
+
+    public function updateArticle(int $articleId, ManagerRegistry $doctrine, Request $request)
     {
         $article = $doctrine->getRepository(Article::class)->find($articleId);
-
-        // Redirection if no article matches the id
+        // If no article matches the id
         if(!$article){
             $this->addFlash(
                 "error",
                 "Aucun article ne correspond à cette adresse."
             );
-            return $this->redirectToRoute('article_list');
+            return "invalid-id";
         }
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $doctrine->getManager()->flush();
-            return $this->redirectToRoute('one_article', ['articleId' => $articleId]);
-        }
-
-
-        return $this->renderForm('article/article-control.html.twig', [
-            'action' => "Modifier un article",
-            'articleForm' => $form,
-        ]);
-    }
-
-
-    // Delete one article if the current user is the author of the article
-    #[Route('/article/{articleId}/delete', name: 'delete_article', requirements: ['articleId' => '\d+'])]
-    public function deleteArticle(ManagerRegistry $doctrine, int $articleId):Response
-    {
-        $article = $doctrine->getRepository(Article::class)->find($articleId);
+        // If the user is the article's author
         if($this->getUser() == $article->getAuthor()){
-            $entityManager = $doctrine->getManager();
-            $entityManager->remove($article);
-            $entityManager->flush();
-            $this->addFlash(
-                "notice",
-                "L'article a été supprimé"
-            );
-            return $this->redirectToRoute('article_list');
+            $form = $this->createForm(ArticleType::class, $article);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $doctrine->getManager()->flush();
+                $this->addFlash("success", "L'article a bien été modifié");
+                return "successful-update";
+            }
+            return $this->renderForm('article/article-control.html.twig', [
+                'action' => "Modifier un article",
+                'articleForm' => $form,
+            ]);
         }else{
             $this->addFlash(
                 "error",
                 "Vous n'avez pas les droits pour effectuer cette action"
             );
-            return $this->redirectToRoute('one_article', ['articleId' => $articleId]);
+            return "notAuthor";
         }
-       
+    }
 
+
+
+
+
+    // Delete one article from the wiki
+    #[Route('/article/{articleId}/delete', name: 'article_delete_wiki', requirements:['articleId' => '\d+'])]
+    public function deleteArticleFromWiki(int $articleId, ManagerRegistry $doctrine)
+    {
+        $this->deleteArticle($articleId, $doctrine);
+        return $this->redirectToRoute('article_list');
+    }
+
+    // Delete one article from dashboard
+    #[Route('/dashboard/{articleId}/delete/', name: 'article_delete_dashboard', requirements: ['articleId' => '\d+'])]
+    public function deleteArticleFromDashboard(int $articleId, ManagerRegistry $doctrine)
+    {
+        $this->deleteArticle($articleId, $doctrine);
+        return $this->redirectToRoute('dashboard');
+    }
+
+
+
+    // Delete one article
+    public function deleteArticle(int $articleId, ManagerRegistry $doctrine)
+    {
+        $article = $doctrine->getRepository(Article::class)->find($articleId);
+        // If no article matches the id
+        if(!$article){
+            $this->addFlash(
+                "error",
+                "Aucun article ne correspond à cette adresse."
+            );
+        }else{
+            // If the user is the article's author
+            if($this->getUser() == $article->getAuthor()){
+                $entityManager = $doctrine->getManager();
+                $entityManager->remove($article);
+                $entityManager->flush();
+                $this->addFlash(
+                    "success",
+                    "L'article a été supprimé"
+                );
+            }else{
+                $this->addFlash(
+                    "error",
+                    "Vous n'avez pas les droits pour effectuer cette action"
+                );
+            }
+        }
     }
  
 

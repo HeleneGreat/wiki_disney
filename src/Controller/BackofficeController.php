@@ -29,28 +29,4 @@ class BackofficeController extends AbstractController
         ]);
     }
 
-        // Delete one article if the current user is the author of the article
-        #[Route('/dashboard/{articleId}/delete', name: 'dash_delete_article', requirements: ['articleId' => '\d+'])]
-        public function deleteArticle(ManagerRegistry $doctrine, int $articleId):Response
-        {
-            $article = $doctrine->getRepository(Article::class)->find($articleId);
-            if($this->getUser() == $article->getAuthor()){
-                $entityManager = $doctrine->getManager();
-                $entityManager->remove($article);
-                $entityManager->flush();
-                $this->addFlash(
-                    "notice",
-                    "L'article a été supprimé"
-                );
-                return $this->redirectToRoute('dashboard');
-            }else{
-                $this->addFlash(
-                    "error",
-                    "Vous n'avez pas les droits pour effectuer cette action"
-                );
-                return $this->render('backoffice/index.htlm.twig', ['articleId' => $articleId]);
-            }
-           
-    
-        }
 }

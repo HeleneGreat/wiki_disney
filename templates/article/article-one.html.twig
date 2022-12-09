@@ -12,7 +12,7 @@
             {% if app.user and app.user.id == article.author.id %}
                 <p class="mb-0">
                     <!-- Button to modify article -->
-                    <a class="btn btn-success" title="Modifier l'article" href="{{path('article_modify', {articleId:article.id})}}">
+                    <a class="btn btn-success" title="Modifier l'article" href="{{path('article_update_wiki', {articleId:article.id})}}">
                         <i class="fa-solid fa-pen"></i>
                     </a>
                     <!-- Button to delete article -->
@@ -93,7 +93,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <a href="{{path('delete_article', {articleId:article.id})}}" class="btn btn-danger">Supprimer</a>
+          <a href="{{path('article_delete_wiki', {articleId:article.id})}}" class="btn btn-danger">Supprimer</a>
         </div>
       </div>
     </div>
