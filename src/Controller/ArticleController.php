@@ -70,6 +70,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //  TODO SEUL AUTEUR PEUT MODIFIER
     // Form to modify an article
     #[Route('/article/{articleId}/modify', name: 'article_modify', requirements:['articleId' => '\d+'])]
     public function modifyArticle(ManagerRegistry $doctrine, int $articleId, Request $request):Response

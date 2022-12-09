@@ -1,3 +1,47 @@
-.article-content{
-    white-space: pre-line;
+#one-article{
+    .title{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        height: fit-content;
+        button{
+            margin-left: 10px;
+        }
+    }
+    .sidebar{
+        font-size: 15px;
+        max-width: 415px;
+        margin: 25px auto;
+        @include media-breakpoint-up(lg){
+            margin: 25px 0 25px 25px;
+            float: right;
+        }
+        h2{
+            color: $castel;
+        }
+        .card, .card-header, .table{
+            border-color: $castel;
+        }
+        tr{
+            border-color: $castel;
+            border-bottom-width: 0;
+        }
+        th{
+            border-left-width: 0;
+        }
+        td{
+            border-right-width: 0;
+        }
+    }
+    .article-content{
+        white-space: pre-line;
+        font-size: 18px;
+    }
+    i, svg{
+        color: white;
+    }
+    hr{
+        color: white;
+    }
 }
