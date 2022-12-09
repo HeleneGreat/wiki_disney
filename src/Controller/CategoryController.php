@@ -25,8 +25,16 @@ class CategoryController extends AbstractController
     public function oneCategory(CategoryRepository $categoryRepository, int $categoryId): Response
     {
         $category = $categoryRepository->findOneBy(['id' => $categoryId]);
+        // Redirection if no article matches the id
+        if(!$category){
+            $this->addFlash(
+                "error",
+                "Aucune catégorie ne correspond à cette adresse."
+            );
+            return $this->redirectToRoute('category_list');
+        }
         $categoryArticles = $category->getArticle();
-
+        
         return $this->render('category/category-one.html.twig', [
             'category' => $category,
             'category_articles' => $categoryArticles,
