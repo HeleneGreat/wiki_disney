@@ -22,10 +22,33 @@
                 </div>
                 <div class="align-items-center align-content-center col-md-3 border-left">
                     <a href="{{ path('article_edit', {articleId:article.id}) }}" class="btn btn-primary ">Modifier</a>
-                    <a href="#" class="btn btn-outline-primary">Supprimer</a>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
                 </div>
             </div>
         </article>
+
+            {% if app.user and app.user.id == article.author.id %}
+                <!-- Modal to delete article -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">{{article.title}}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <p>Êtes-vous sûr de vouloir supprimer définitivement cet article ?</p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <a href="{{ path('dash_delete_article', {articleId:article.id}) }}" class="btn btn-danger">Supprimer</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 </section>
