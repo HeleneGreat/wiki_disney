@@ -32,36 +32,38 @@
                     <div class="card-header text-center">
                         <h2>{{article.title}}</h2>
                     </div>
-                <img src="{{asset('images/')}}{{article.picture}}" alt="{{article.title}}" class="mx-auto my-2 px-5 w-100">
-                <table class="table table-bordered mb-0 d-flex" style="font-size:12px">
-                    <tr>
-                        <th class="col-4">Résumé</th>
-                        <td>{{article.summary}}</td>
-                    </tr>
-                    <tr>
-                        <th class="col-4">Catégories</th>
-                        <td>
-                             <ul class="p-0 m-0">
-                                {% for category in article.category %}
-                                    <li><a href="{{path('one_category', {categoryId:category.id})}}">{{category.name}}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="col-4">Auteur</th>
-                         <td><span>
-                            {# TODO : ajouter lien vers la page avec la liste de tous les articles écrits par ce user quand la route aura été créée #}
-                             <a href="">
-                                {% if article.author.id > 0 %}
-                                    {{article.author.pseudo}}
-                                {% else %}
-                                    Auteur inconnu
-                                {% endif %}
-                            </a></span>
-                        </td>
-                    </tr>
-                </table>
+                    
+                    <img src="{{asset('images/')}}{{article.picture}}" alt="{{article.title}}" class="mx-auto my-2 px-5 w-100">
+                    <table class="table table-bordered mb-0 d-flex" style="font-size:12px">
+                        <tr>
+                            <th class="col-4">Résumé</th>
+                            <td>{{article.summary}}</td>
+                        </tr>
+                        <tr>
+                            <th class="col-4">Catégories</th>
+                            <td>
+                                <ul class="p-0 m-0">
+                                    {% for category in article.category %}
+                                        <li><a href="{{path('one_category', {categoryId:category.id})}}">{{category.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="col-4">Auteur</th>
+                            <td><span>
+                                {# TODO : ajouter lien vers la page avec la liste de tous les articles écrits par ce user quand la route aura été créée #}
+                                <a href="">
+                                    {% if article.author.id > 0 %}
+                                        {{article.author.pseudo}}
+                                    {% else %}
+                                        Auteur inconnu
+                                    {% endif %}
+                                </a></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <!--end of sidebar-->
 

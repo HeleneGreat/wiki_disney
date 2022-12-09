@@ -54,7 +54,7 @@ a{
     margin: 20px auto;
     color: white;
     font-size: 20px;
-    &.flash-notice{
+    &.flash-success, &.flash-notice{
         background-color: $success;
     }
     &.flash-warning{

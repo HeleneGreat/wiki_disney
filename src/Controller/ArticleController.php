@@ -88,7 +88,6 @@ class ArticleController extends AbstractController
         }
 
         return $this->renderForm('article/article-control.html.twig', [
-            'all_categories' => $allCategories,
             'action' => "Ajouter un article",
             'articleForm' => $form
         ]);
