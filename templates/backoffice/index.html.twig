@@ -21,7 +21,7 @@
                     <p class="text-justify text-truncate para mb-0">{{article.movie}}</p>
                 </div>
                 <div class="align-items-center align-content-center col-md-3 border-left">
-                    <a href="{{ path('article_edit', {articleId:article.id}) }}" class="btn btn-primary ">Modifier</a>
+                    <a href="{{ path('article_update_dashboard', {articleId:article.id}) }}" class="btn btn-primary ">Modifier</a>
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
                 </div>
             </div>

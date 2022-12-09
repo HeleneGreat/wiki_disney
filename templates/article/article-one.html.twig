@@ -12,7 +12,7 @@
             {% if app.user and app.user.id == article.author.id %}
                 <p class="mb-0">
                     <!-- Button to modify article -->
-                    <a class="btn btn-success" title="Modifier l'article" href="{{path('article_modify', {articleId:article.id})}}">
+                    <a class="btn btn-success" title="Modifier l'article" href="{{path('article_update_wiki', {articleId:article.id})}}">
                         <i class="fa-solid fa-pen"></i>
                     </a>
                     <!-- Button to delete article -->
