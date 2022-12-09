@@ -46,25 +46,31 @@ class ArticleController extends AbstractController
     public function createArticle(ManagerRegistry $doctrine, Request $request):Response
     {
         // User must be registered to access this page
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        if($this->getUser()){
+            $article = new Article();
+            $article->setAuthor($this->getUser());
+            $form = $this->createForm(ArticleType::class, $article);
+            $form->handleRequest($request);
 
-        $article = new Article();
-        $article->setAuthor($this->getUser());
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $article = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($article);
+                $entityManager->flush();
+                return $this->redirectToRoute('article_list');
+            }
 
-        if($form->isSubmitted() && $form->isValid()){
-            $article = $form->getData();
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($article);
-            $entityManager->flush();
-            return $this->redirectToRoute('article_list');
+            return $this->renderForm('article/article-control.html.twig', [
+                'action' => "Ajouter un article",
+                'articleForm' => $form
+            ]);
+        }else{
+            $this->addFlash(
+                "error",
+                "Vous devez être connecté pour ajouter un article"
+            );
+            return $this->redirectToRoute('app_login');
         }
-
-        return $this->renderForm('article/article-control.html.twig', [
-            'action' => "Ajouter un article",
-            'articleForm' => $form
-        ]);
     }
 
     // Update one article from the wiki
@@ -126,10 +132,6 @@ class ArticleController extends AbstractController
         }
     }
 
-
-
-
-
     // Delete one article from the wiki
     #[Route('/article/{articleId}/delete', name: 'article_delete_wiki', requirements:['articleId' => '\d+'])]
     public function deleteArticleFromWiki(int $articleId, ManagerRegistry $doctrine)
@@ -145,8 +147,6 @@ class ArticleController extends AbstractController
         $this->deleteArticle($articleId, $doctrine);
         return $this->redirectToRoute('dashboard');
     }
-
-
 
     // Delete one article
     public function deleteArticle(int $articleId, ManagerRegistry $doctrine)
