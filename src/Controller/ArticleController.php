@@ -49,7 +49,6 @@ class ArticleController extends AbstractController
         // User must be registered to access this page
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 
-        $allCategories = $doctrine->getRepository(Category::class)->findAll();
         $article = new Article();
         $article->setAuthor($this->getUser());
         $form = $this->createForm(ArticleType::class, $article);
@@ -62,7 +61,7 @@ class ArticleController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('article_list');
         }
-        
+
         return $this->renderForm('article/article-control.html.twig', [
             'all_categories' => $allCategories,
             'action' => "Ajouter un article",
