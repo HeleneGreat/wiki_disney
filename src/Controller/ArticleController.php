@@ -86,11 +86,43 @@ class ArticleController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('article_list');
         }
-        
-        return $this->renderForm('article/article-add.html.twig', [
+
+        return $this->renderForm('article/article-control.html.twig', [
+            'all_categories' => $allCategories,
+            'action' => "Ajouter un article",
             'articleForm' => $form
         ]);
     }
+
+    //  TODO SEUL AUTEUR PEUT MODIFIER
+    // Form to modify an article
+    #[Route('/article/{articleId}/modify', name: 'article_modify', requirements:['articleId' => '\d+'])]
+    public function modifyArticle(ManagerRegistry $doctrine, int $articleId, Request $request):Response
+    {
+        $article = $doctrine->getRepository(Article::class)->find($articleId);
+
+        // Redirection if no article matches the id
+        if(!$article){
+            $this->addFlash(
+                "error",
+                "Aucun article ne correspond à cette adresse."
+            );
+            return $this->redirectToRoute('article_list');
+        }
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $doctrine->getManager()->flush();
+            return $this->redirectToRoute('one_article', ['articleId' => $articleId]);
+        }
+
+
+        return $this->renderForm('article/article-control.html.twig', [
+            'action' => "Modifier un article",
+            'articleForm' => $form,
+        ]);
+    }
+
 
     // Delete one article if the current user is the author of the article
     #[Route('/article/{articleId}/delete', name: 'delete_article', requirements: ['articleId' => '\d+'])]

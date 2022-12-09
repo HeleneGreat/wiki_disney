@@ -4,27 +4,34 @@
 
 {% block body %}
 
-<section class="container">
+<section id="one-article" class="container">
     <div class="row">
         <!-- article header -->
-        <article class="col-12 col-md-8">
-            <h1 class="my-4">{{article.title}}</h1>
-            <hr/>
+        <article class="col-12 col-lg-8 title">
+            <h1>{{article.title}}</h1>
             {% if app.user and app.user.id == article.author.id %}
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Supprimer l'article">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
+                <p class="mb-0">
+                    <!-- Button to modify article -->
+                    <a class="btn btn-success" title="Modifier l'article" href="{{path('article_modify', {articleId:article.id})}}">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <!-- Button to delete article -->
+                    <button type="button" class="btn btn-warning ml-3" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Supprimer l'article">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </p>
             {% endif %}
+            <hr class="col-12">
         </article>
         <!-- end of article header -->
         
-        <!-- sidebar -->
-        <article class="col-12 col-md-4">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h6>{{article.title}}</h6>
-                </div>
+        <article class="col-12">
+            <!-- sidebar -->
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2>{{article.title}}</h2>
+                    </div>
                 <img src="{{asset('images/')}}{{article.picture}}" alt="{{article.title}}" class="mx-auto my-2 px-5 w-100">
                 <table class="table table-bordered mb-0 d-flex" style="font-size:12px">
                     <tr>
@@ -32,9 +39,9 @@
                         <td>{{article.summary}}</td>
                     </tr>
                     <tr>
-                        <th class="col-4"><a href="{{path('category_list')}}" title="Toutes les catégories">Catégories</a></th>
+                        <th class="col-4">Catégories</th>
                         <td>
-                            <ul class="p-0">
+                             <ul class="p-0 m-0">
                                 {% for category in article.category %}
                                     <li><a href="{{path('one_category', {categoryId:category.id})}}">{{category.name}}</a></li>
                                 {% endfor %}
@@ -43,9 +50,9 @@
                     </tr>
                     <tr>
                         <th class="col-4">Auteur</th>
-                        <td><span style="word-break: break-all;">
+                         <td><span>
                             {# TODO : ajouter lien vers la page avec la liste de tous les articles écrits par ce user quand la route aura été créée #}
-                            <a href="">
+                             <a href="">
                                 {% if article.author.id > 0 %}
                                     {{article.author.pseudo}}
                                 {% else %}
@@ -56,18 +63,14 @@
                     </tr>
                 </table>
             </div>
-        </article>
-        <!--end of sidebar-->
+            <!--end of sidebar-->
 
         <!-- main article -->
-        <article>
-            <!-- TODO ajouter les liens de modification et suppression SI l'utilisateur est l'auteur -->
-            <h2 class="d-inline">Histoire </h2><small>[<a href="#">Modifier l'article</a> | <a href="#">Supprimer l'article</a>]</small>
-            <hr/>
+
             <p class="article-content">{{article.content}}</p>
             <hr/>
+            <!-- end of main article -->
         </article>
-        <!-- end of main article -->
     </div>
 </section>
 
@@ -78,7 +81,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{article.title}}</h5>
+          <h2 class="modal-title" id="exampleModalLabel">{{article.title}}</h2>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
