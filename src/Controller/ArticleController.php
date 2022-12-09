@@ -10,7 +10,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Form\ArticleType;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ArticleController extends AbstractController
 {
@@ -31,9 +30,7 @@ class ArticleController extends AbstractController
     {
         $article = $doctrine->getRepository(Article::class)->findOneBy(['id' => $articleId]);
         if(!$article){
-            throw $this->createNotFoundException(
-                'Aucun article ne correspond à cette URL.'
-            );
+            return $this->redirectToRoute('article_list');
         }
         return $this->render('article/article-one.html.twig', [
             'article' => $article,
