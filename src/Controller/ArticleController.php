@@ -31,9 +31,11 @@ class ArticleController extends AbstractController
     {
         $article = $doctrine->getRepository(Article::class)->findOneBy(['id' => $articleId]);
         if(!$article){
-            throw $this->createNotFoundException(
-                'Aucun article ne correspond à cette URL.'
+            $this->addFlash(
+                "error",
+                "Aucun article ne correspond à cette adresse."
             );
+            return $this->redirectToRoute('article_list');
         }
         return $this->render('article/article-one.html.twig', [
             'article' => $article,
