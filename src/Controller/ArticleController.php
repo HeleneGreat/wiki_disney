@@ -40,7 +40,32 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //Function to edit one article from dashboard
+    #[Route('/article/{articleId}/edit/', name: 'article_edit', requirements: ['articleId' => '\d+'])]
+    public function articleEdit(int $articleId, ManagerRegistry $doctrine, Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        
+        $allCategories = $doctrine->getRepository(Category::class)->findAll();
+        $article = $doctrine->getRepository(Article::class)->find($articleId);
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+            $this->addFlash("success","L'article a été modifié");
+            return $this->redirectToRoute('dashboard');
+        }
+        
+        return $this->renderForm('article/article-edit.html.twig', [
+            'articleId' => $articleId,
+            'all_categories' => $allCategories,
+            'articleForm' => $form
+        ]);
+    }
 
     // Form to add a new article
     #[Route('/article/add', name: 'article_add', requirements:['add' => 'a-zA-Z'])]
