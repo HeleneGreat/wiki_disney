@@ -70,7 +70,7 @@ class CategoryController extends AbstractController
         $entityManager->persist($creature);
 
         $entityManager->flush();
-        return $this->redirectToRoute('category-list');
+        return $this->redirectToRoute('category_list');
     }
 
 

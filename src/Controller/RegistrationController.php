@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class RegistrationController extends AbstractController
 {
@@ -46,5 +47,35 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+
+    
+
+    // INIT THE USER TABLE IN DB 
+    // Only do it once
+    #[Route('/user/init', name: 'user_init')]
+    public function userInit(ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        // Walt
+        $walt = new User();
+        $walt->setPseudo('Walt');
+        $walt->setImage('walt.png');
+        $walt->setEmail('walt@disney.com');
+        $walt->setPassword($userPasswordHasher->hashPassword($walt, '123456'));
+        $entityManager->persist($walt);
+
+        // Edith
+        $edith = new User();
+        $edith->setPseudo('Edith');
+        $edith->setImage('edith.png');
+        $edith->setEmail('edith@disney.com');
+        $edith->setPassword($userPasswordHasher->hashPassword($edith, '123456'));
+        $entityManager->persist($edith);
+
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
     }
 }
