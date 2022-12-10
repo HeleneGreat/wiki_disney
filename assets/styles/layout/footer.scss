@@ -1,0 +1,33 @@
+footer{
+    background-color: $banner;
+    border-top: solid 1px #ffffffa3;
+    p, ul{
+        color: $title;
+        font-size: 20px;
+        &.title{
+            font-family: 'Mouse Memoirs', sans-serif;
+            font-size: 25px;
+            letter-spacing: 1px;
+        }
+    }
+    .logo{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .title{
+            font-size: 70px;
+            margin: 0;
+        }
+        img{
+            margin-right: 20px;
+            width: 100px;
+            height: auto;
+        }
+    }
+    .footer-bottom{
+        background-color: $bleu-fonce;
+        color: white;
+        text-align: center;
+        border-top: solid 1px #ffffffa3;
+    }
+}
