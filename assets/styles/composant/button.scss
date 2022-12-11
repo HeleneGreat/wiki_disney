@@ -1,0 +1,51 @@
+.btn, .btn:hover, .btn:focus, .btn:active{
+    color: white;
+}
+
+.btn-success{
+    background-color: $success;
+    border-color: $success;
+    &:hover, &:active{
+        background-color: darken($success,10%);
+        border-color: darken($success, 10%);
+    }
+    &:focus{
+        box-shadow: 0 0 0 0.25rem fade-out($success, 0.6);
+    }
+}
+
+.btn-warning{
+    background-color: $warning;
+    border-color: $warning;
+    &:hover, &:active{
+        background-color: darken($warning, 15%);
+        border-color: darken($warning, 15%);
+    }
+    &:focus{
+        box-shadow: 0 0 0 0.25rem fade-out($warning, 0.6);
+    }
+}
+
+.btn-error{
+    background-color: $error;
+    border-color: $error;
+    &:hover, &:active{
+        background-color: darken($error, 15%);
+        border-color: darken($error, 15%);
+    }
+    &:focus{
+        box-shadow: 0 0 0 0.25rem fade-out($error, 0.6);
+    }
+}
+
+.btn-blue{
+    background-color: $bleu-fonce;
+    border-color: $bleu-fonce;
+    &:hover, &:active{
+        background-color: darken($bleu-fonce, 15%);
+        border-color: darken($bleu-fonce, 15%);
+    }
+    &:focus{
+        box-shadow: 0 0 0 0.25rem fade-out($bleu-fonce, 0.6);
+    }
+}

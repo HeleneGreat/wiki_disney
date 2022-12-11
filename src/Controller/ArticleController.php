@@ -105,7 +105,7 @@ class ArticleController extends AbstractController
     public function updateArticleFromWiki(int $articleId, ManagerRegistry $doctrine, Request $request)
     {
         $response = $this->updateArticle($articleId, $doctrine, $request);
-        if($response == "successful-update" || $response = "notAuthor"){
+        if($response == "successful-update" || $response == "notAuthor"){
             return $this->redirectToRoute('one_article', ['articleId' => $articleId]);
         }elseif($response == "invalid_id"){
             return $this->redirectToRoute('article_list');
@@ -119,7 +119,7 @@ class ArticleController extends AbstractController
     public function updateArticleFromDashboard(int $articleId, ManagerRegistry $doctrine, Request $request)
     {
         $response = $this->updateArticle($articleId, $doctrine, $request);
-        if($response == "successful-update" || $response == "invalid_id" || $response = "notAuthor"){
+        if($response == "successful-update" || $response == "invalid_id" || $response == "notAuthor"){
             return $this->redirectToRoute('dashboard');
         }else{
             return $response;

@@ -24,7 +24,7 @@ class BackofficeController extends AbstractController
 
         $userArticles = $doctrine->getRepository(Article::class)->findBy(['author' => $userId]);
         
-        return $this->render('backoffice/index.html.twig', [
+        return $this->render('backoffice/dashboard.html.twig', [
             'articles' => $userArticles,
         ]);
     }
