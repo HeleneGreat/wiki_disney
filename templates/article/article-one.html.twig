@@ -16,7 +16,7 @@
                         <i class="fa-solid fa-pen"></i>
                     </a>
                     <!-- Button to delete article -->
-                    <button type="button" class="btn btn-warning ml-3" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Supprimer l'article">
+                    <button type="button" class="btn btn-warning ml-3" data-bs-toggle="modal" data-bs-target="#deleteModal" title="Supprimer l'article">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </p>
@@ -34,7 +34,11 @@
                     </div>
                     
                     <img src="{{asset('images/')}}{{article.picture}}" alt="{{article.title}}" class="mx-auto my-2 px-5 w-100">
-                    <table class="table table-bordered mb-0 d-flex" style="font-size:12px">
+                    <table class="table table-bordered mb-0">
+                        <tr>
+                            <th class="col-4">Film</th>
+                            <td>{{article.movie}}</td>
+                        </tr>
                         <tr>
                             <th class="col-4">Résumé</th>
                             <td>{{article.summary}}</td>
@@ -79,11 +83,11 @@
 
 {% if app.user and app.user.id == article.author.id %}
   <!-- Modal to delete article -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">{{article.title}}</h2>
+          <h2 class="modal-title" id="deleteModalLabel">{{article.title}}</h2>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

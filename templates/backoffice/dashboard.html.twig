@@ -20,9 +20,16 @@
                     <h3>{{article.title}}</h3>
                     <p class="text-justify text-truncate para mb-0">{{article.movie}}</p>
                 </div>
-                <div class="align-items-center align-content-center col-md-3 border-left">
-                    <a href="{{ path('article_update_dashboard', {articleId:article.id}) }}" class="btn btn-primary ">Modifier</a>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+                <div class="col-md-3">
+                    <a href="{{path('one_article', {articleId:article.id})}}" title="Lire l'article" class="btn btn-blue">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="{{path('article_update_dashboard', {articleId:article.id})}}" title="Modifier l'article" class="btn btn-success">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deleteModal" title="Supprimer l'article">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
             </div>
         </article>
@@ -51,12 +58,10 @@
             {% endif %}
         {% endfor %}
     </div>
+    <a href="{{path('article_add')}}" title="Ajouter un article" class="btn btn-error btn-floating rounded-circle">
+        <i class="fas fa-plus"></i>
+    </a>
 </section>
 
-<a href="{{path('article_add')}}" title="Ajouter un article" class="btn btn-primary btn-floating rounded-circle">
-    <i class="fas fa-plus"></i>
-</a>
-  
-<div><a href="" title="Ajouter un article"></a></div>
 
 {% endblock %}
