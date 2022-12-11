@@ -4,17 +4,14 @@
 		<div class="d-none d-md-block castle"><img src="{{asset('images/disney_castle.png')}}" alt="chateau disney"></div>
 		<p class="d-flex justify-content-center">Disney</p>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg">
+		<div class="container container-fluid">
 			<a class="navbar-brand" href="{{path('home')}}">Accueil</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">		
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('article_list') }}">Tous les articles</a>
-					</li>
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Catégories
@@ -31,27 +28,43 @@
 							</li>
 						</ul>
 					</li>
-					{% if app.user %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('article_add') }}">Créer un article</a>
+						<a class="nav-link" href="{{ path('article_list') }}">Tous les articles</a>
 					</li>
+					{% if app.user %}
+					
 					{% endif %}
 				</ul>
+
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				{% if app.user %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('dashboard') }}">Mon compte</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fa-solid fa-user"></i> {{app.user.pseudo}}
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<a class="dropdown-item" href="{{ path('dashboard')}}">Tableau de bord</a>
+							</li>
+							<li>
+								<!-- TODO add link to account information -->
+								<a class="dropdown-item" href="#">Mon compte</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href="{{path('app_logout')}}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+							</li>
+						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_logout') }}">Me déconnecter</a>
+						<a class="nav-link" href="{{ path('article_add') }}">Ajouter un article</a>
 					</li>
 				{% else %}
-
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_register') }}">M'inscrire</a>
+						<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_login') }}">Me connecter</a>
+						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
 					</li>
 				{% endif %}
 				</ul>
