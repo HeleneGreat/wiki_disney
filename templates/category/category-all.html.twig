@@ -12,7 +12,7 @@
             <div class="col-6 col-md-3">
                 <a href="{{path('one_category', {categoryId:category.id})}}">
                     <div class="card">
-                        <img src="https://cdn.pixabay.com/photo/2022/10/15/14/55/ornamental-plant-7523304_960_720.jpg" class="card-img-top" alt="...">
+                        <img src="{{asset('uploads/categories/')}}{{category.image}}" class="card-img-top category mx-auto py-3" alt="{{category.name}}">
                         <div class="card-body">
                             <h2 class="card-title">{{category.name}} <span class="badge text-bg-secondary" title="{{category.article|length}} articles">{{category.article|length}}</span></h2>
                         </div>
