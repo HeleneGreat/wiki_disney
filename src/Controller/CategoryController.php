@@ -15,7 +15,7 @@ class CategoryController extends AbstractController
 
     // List of all categories
     #[Route('/category', name: 'category_list')]
-    public function categoryList(ManagerRegistry $doctrine): Response
+    public function categoryList(): Response
     {
         return $this->render('category/category-all.html.twig', []);
     }
