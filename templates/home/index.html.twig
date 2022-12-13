@@ -5,16 +5,16 @@
 {% block body %}
 
 <section>
-    <div class="top_page" style="text-align:center;background-color:grey;border-radius:5px;width: 55%;margin:0 auto;margin-top:15px;padding:15px;border: 1px solid white;">
+    <div class="top_page">
         <h1>Bienvenue sur Wiki Disney !</h1>
         <h2>L'encyclopédie développée par une communauté de passionnés.</h2>
-        <div style="border-bottom:2px solid black; width: 90%; margin:0 auto;"></div>
+        <div class="ligne" style=""></div>
 
-        <div class="text_page" style="font-size:16px; width: 90%; margin: 0 auto; margin-top: 15px; text-align: left;">
+        <div class="text_page">
             <p>Nous vous souhaitons énormément de succès et de plaisir sur le Wiki Disney !<br>
             Votre connaissance du monde Disney nous sera d'un grand recours.<br>
-            <ul style=" list-style-type: disc;">
-                <li style="width: 65%">Pour en connaître un peu plus sur le fonctionnement d'un wiki, vous avez la possibilité de vous adresser à un membre du wiki sur sa page de discussion ou de vous rendre sur le Centre des Communautés.</li>
+            <ul class="list_text">
+                <li class="li_text">Pour en connaître un peu plus sur le fonctionnement d'un wiki, vous avez la possibilité de vous adresser à un membre du wiki sur sa page de discussion ou de vous rendre sur le Centre des Communautés.</li>
                 <li>Afin de connaître le fonctionnement du wiki.</li>
                 <li>Enfin, pour vous familiariser avec votre profil et votre page de discussion.</li>
             </ul>
@@ -24,10 +24,10 @@
         </div>
     </div>
 
-    <section class="container" style="margin-top:15px; padding: 15px">
-        <div style="display:flex; justify-content:space-between"><h1>Articles les plus consulté</h1><h1>Catégories les plus consulté</h1></div>
+    <section class="container">
+        <div class="titre"><h1>Articles les plus consulté</h1><h1>Catégories les plus consulté</h1></div>
         <div class="row g-4">
-            {% for article in all_articles|slice(0,2) %}
+            {% for article in mixed_articles %}
                 <div class="col-6 col-md-3 h-100">
                     <a href="{{path('one_article', {articleId:article.id})}}">
                         <div class="card">
@@ -40,7 +40,7 @@
                 </div>
             {% endfor %}
             
-            {% for category in all_cats|slice(0,2) %}
+            {% for category in mixed_cats %}
                 <div class="col-6 col-md-3">
                     <a href="{{path('one_category', {categoryId:category.id})}}">
                         <div class="card">
