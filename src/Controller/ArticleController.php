@@ -189,6 +189,7 @@ class ArticleController extends AbstractController
         }else{
             // If the user is the article's author
             if($this->getUser() == $article->getAuthor()){
+                unlink('../public/uploads/articles/' . $article->getImage());
                 $entityManager = $doctrine->getManager();
                 $entityManager->remove($article);
                 $entityManager->flush();
