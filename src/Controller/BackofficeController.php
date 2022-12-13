@@ -28,5 +28,20 @@ class BackofficeController extends AbstractController
             'articles' => $userArticles,
         ]);
     }
+    #[Route('/mesinfos', name: 'mesinfos')]
+    public function afficheMesInfos(ManagerRegistry $doctrine, UserInterface $user): Response
+    {
+        // User must be registered to access this page
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+
+        $userEmail = $this->getUser()->getUserIdentifier();
+        $userId = $doctrine->getRepository(User::class)->findOneBy(['email' => $userEmail])->getId();
+
+        $userArticles = $doctrine->getRepository(Article::class)->findBy(['author' => $userId]);
+        
+        return $this->render('backoffice/mesinfos.html.twig', [
+            'articles' => $userArticles,
+        ]);
+    }
 
 }
