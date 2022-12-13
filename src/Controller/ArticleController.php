@@ -236,7 +236,6 @@ class ArticleController extends AbstractController
         
         Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.');
         $florian->setImage('florian.png');
-        $florian->setPicture('florian.png');
         $florian->setMovie('Blanche-neige');
         $florian->setAuthor($walt);
         $entityManager->persist($florian);
@@ -256,7 +255,6 @@ class ArticleController extends AbstractController
         
         Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.');
         $grenouille->setImage('grenouille.png');
-        $grenouille->setPicture('grenouille.png');
         $grenouille->setMovie('La princesse et la grenouille');
         $grenouille->setAuthor($walt);
         $entityManager->persist($grenouille);
@@ -274,7 +272,6 @@ class ArticleController extends AbstractController
         
         Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.');
         $bete->setImage('bete.png');
-        $bete->setPicture('bete.png');
         $bete->setMovie('La belle et la bête');
         $bete->setAuthor($edith);
         $entityManager->persist($bete);
@@ -291,7 +288,6 @@ class ArticleController extends AbstractController
         
         Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.');
         $merida->setImage('merida.png');
-        $merida->setPicture('merida.png');
         $merida->setMovie('Rebel');
         $merida->setAuthor($walt);
         $entityManager->persist($merida);
@@ -308,7 +304,6 @@ class ArticleController extends AbstractController
         
         Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.');
         $frolo->setImage('frolo.png');
-        $frolo->setPicture('frolo.png');
         $frolo->setMovie('Le bossu de Notre-Dame');
         $frolo->setAuthor($walt);
         $entityManager->persist($frolo);
@@ -325,7 +320,6 @@ class ArticleController extends AbstractController
         
         Curabitur aliquet quam id dui posuere blandit. Donec sollicitudin molestie malesuada. Curabitur aliquet quam id dui posuere blandit. Nulla quis lorem ut libero malesuada feugiat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat. Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada feugiat. Vivamus suscipit tortor eget felis porttitor volutpat.');
         $cruella->setImage('cruella.png');
-        $cruella->setPicture('cruella.png');
         $cruella->setMovie('Les 101 dalmatiens');
         $cruella->setAuthor($edith);
         $entityManager->persist($cruella);
