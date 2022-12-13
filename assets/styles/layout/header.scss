@@ -6,11 +6,13 @@ header{
         font-size: 5em;
         color: $title;
     }
-    
+    img{
+        width: 130px;
+    }
    
     .castle{
         text-align: center;
-        width: 30%;
+        width: 25%;
     }
     .navbar{
         background-color: $bleu-fonce;
