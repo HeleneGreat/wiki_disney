@@ -35,9 +35,6 @@ class ArticleType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => "Contenu de l'article"
             ])
-            ->add('picture', TextType::class, [
-                'label' => "Image de l'article",
-            ])
             ->add('image', FileType::class, [
                 'label' => 'Photo de votre personnage',
 
