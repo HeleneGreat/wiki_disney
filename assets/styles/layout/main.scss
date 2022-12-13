@@ -52,3 +52,8 @@ a{
         height: auto;
     }
 }
+.alert-danger{
+    color: white;
+    background-color: $error;
+    border-color: $error;
+}
