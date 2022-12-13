@@ -8,15 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Article;
 use App\Entity\User;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class BackofficeController extends AbstractController
 {
 
     #[Route('/dashboard', name: 'dashboard')]
-    public function index(ManagerRegistry $doctrine, UserInterface $user): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        // User must be registered to access this page
+        if($this->getUser()){
+            // User must be registered to access this page
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 
         $userEmail = $this->getUser()->getUserIdentifier();
@@ -27,21 +27,31 @@ class BackofficeController extends AbstractController
         return $this->render('backoffice/dashboard.html.twig', [
             'articles' => $userArticles,
         ]);
+        }else{
+            $this->addFlash(
+                "error",
+                "Vous n'avez pas les droits pour effectuer cette action"
+            );
+            return $this->redirectToRoute('home');
+        }
+        
     }
     #[Route('/mesinfos', name: 'mesinfos')]
-    public function afficheMesInfos(ManagerRegistry $doctrine, UserInterface $user): Response
+    public function afficheMesInfos(): Response
     {
-        // User must be registered to access this page
+        if($this->getUser()){
+             // User must be registered to access this page
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-
-        $userEmail = $this->getUser()->getUserIdentifier();
-        $userId = $doctrine->getRepository(User::class)->findOneBy(['email' => $userEmail])->getId();
-
-        $userArticles = $doctrine->getRepository(Article::class)->findBy(['author' => $userId]);
         
-        return $this->render('backoffice/mesinfos.html.twig', [
-            'articles' => $userArticles,
-        ]);
+        return $this->render('backoffice/mesinfos.html.twig');
+        }else{
+            $this->addFlash(
+                    "error",
+                    "Vous n'avez pas les droits pour effectuer cette action"
+                );
+                return $this->redirectToRoute('home');
+        }
+       
     }
 
 }
