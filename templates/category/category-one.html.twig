@@ -3,9 +3,9 @@
 {% block title %}{{category.name}}{% endblock %}
 
 {% block body %}
-<section class="container">
-    <h1>{{category.name}}</h1>
-    <div class="row g-4">
+<section id="category" class="container">
+    <h1>{{category.name}} <img src="{{asset('uploads/categories/')}}{{category.image}}" alt="{{category.name}}"></h1>
+    <div class="row g-4 mt-0">
         {% if category_articles is defined %}
             {% for article in category_articles %}
             <div class="col-6 col-md-3">

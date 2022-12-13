@@ -3,15 +3,16 @@
     h2{
         color: $castel;
         font-size: 22px;
-        @include media-breakpoint-up(lg){
-            font-size: 27px;
-        }
     }
     img{
         object-fit: cover;
         height: 150px;
         @include media-breakpoint-up(md){
             height: 220px;
+        }
+        &.category{
+            width: 110px;
+            height: auto;
         }
     }
     .badge{
