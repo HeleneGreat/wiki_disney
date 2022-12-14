@@ -219,6 +219,7 @@ class ArticleController extends AbstractController
         $princes = $doctrine->getRepository(Category::class)->findOneBy(['name' => "Princes & princesses"]);
         $mechants = $doctrine->getRepository(Category::class)->findOneBy(['name' => "Méchants"]);
         $creatures = $doctrine->getRepository(Category::class)->findOneBy(['name' => "Créatures fantastiques"]);
+        $animaux = $doctrine->getRepository(Category::class)->findOneBy(['name' => "Animaux"]);
 
         $walt = $doctrine->getRepository(User::class)->findOneBy(['Pseudo' => "Walt"]);
         $edith = $doctrine->getRepository(User::class)->findOneBy(['Pseudo' => "Edith"]);
@@ -324,6 +325,37 @@ class ArticleController extends AbstractController
         $cruella->setMovie('Les 101 dalmatiens');
         $cruella->setAuthor($edith);
         $entityManager->persist($cruella);
+
+        // Meeko
+        $entityManager = $doctrine->getManager();
+        $meeko = new Article();
+        $meeko->setTitle('Meeko');
+        $meeko->addCategory($animaux);
+        $meeko->setSummary("Meeko est un raton-laveur et il est ami avec Pocahontas et Flit.");
+        $meeko->setContent('Alors qu’il mange des framboises, Flit lui en vole une. Il suit ensuite Pocahontas qui plonge du haut de la falaise mais il se rend compte trop tard de la hauteur et s’agrippe à Flit dans l’espoir de voler mais il finit à l’eau quand même. Il rentre par la suite au village avec ses amis. Il joue avec Flit dans une des cabanes.
+
+        Meeko accompagne Pocahontas lors d’une ballade en barque. Il est présent quand Pocahontas s’adresse à Grand-Mère Feuillage.');
+        $meeko->setImage('meeko.jpg');
+        $meeko->setMovie('Pocahantas');
+        $meeko->setAuthor($edith);
+        $entityManager->persist($meeko);
+
+
+        // Hei Hei
+        $entityManager = $doctrine->getManager();
+        $heihei = new Article();
+        $heihei->setTitle('Hei Hei');
+        $heihei->addCategory($animaux);
+        $heihei->setSummary("Hei Hei est l’un des deux animaux de compagnie de l’héroïne Vaiana dans le film d’animation Vaiana, la Légende du Bout du Monde.");
+        $heihei->setContent('Contrairement à Pua, le petit cochon fidèle et attendrissant qui reste sur la terre ferme, le poulet accompagne la jeune aventurière dans son périple pour retrouver le demi-dieu Maui et restituer le cœur de Te Fiti. Avec sa démarche robotique, ses yeux globuleux et vides et son comportement plus qu’hilarant, Hei Hei est un acolyte indispensable à l’aventure, tant dans le rôle qu’il y joue que dans le rire qu’il répand.
+        
+        Dès son plus jeune âge, Vaiana est accompagnée par ce poulet maladroit. Dans la chanson introductive de l’héroïne, elle observe en effet d’autres poulets marcher et éviter une noix de coco sur leur passage. Hei Hei, dernier de la file et se distinguant des autres par son beau pelage bleu, vert et feu, a quant à lui une coque de noix de coco sur la tête qui lui bouche la vue, et malgré le geste de la jeune princesse qui lui ôte son couvre-chef, il trébuche sur l’obstacle et s’étale de tout son long : c\'est le début de leur amitié !
+        
+        Plus tard au cours de la chanson, le petit animal montre une nouvelle fois sa grande intelligence en allant se coucher... sur des braises, au milieu du repas en train de cuire ! C’est la princesse qui le sauve en l’enlevant du brasier, sous le regard abasourdi d’une villageoise. Hei Hei continue son trajet, comme si rien ne s’était passé, excepté que deux de ses plumes arrières sont rougies par le feu… Peu après, alors que Vaiana soutient les villageois dans différents événements de leur quotidien, un homme surveillant des braises lui dit, en pointant du doigt Hei Hei à ses côtés : « Je suis intrigué par ce poulet qui mange des cailloux, là, il semble manquer du minimum d’intelligence requis pour… presque tout. Peut-être qu’on ferait mieux de… le faire cuire ? ». ');
+        $heihei->setImage('heihei.jpg');
+        $heihei->setMovie('Vaiana');
+        $heihei->setAuthor($walt);
+        $entityManager->persist($heihei);
 
 
 

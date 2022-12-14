@@ -69,6 +69,12 @@ class CategoryController extends AbstractController
         $creature->setImage('creatures-fantastiques.png');
         $entityManager->persist($creature);
 
+        // Animaux
+        $creature = new Category();
+        $creature->setName('Animaux');
+        $creature->setImage('animaux.png');
+        $entityManager->persist($creature);
+
         $entityManager->flush();
         return $this->redirectToRoute('category_list');
     }
