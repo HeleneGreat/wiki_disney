@@ -33,10 +33,11 @@
     }
     .list_text {
         list-style-type: disc;
+        & li{
+            margin-bottom: 10px;
+        }
     }
-    .li_text {
-        width: 65%;
-    }
+   
     img{
         margin: auto;
     }
