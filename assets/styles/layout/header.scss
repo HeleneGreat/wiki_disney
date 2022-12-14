@@ -9,7 +9,17 @@ header{
     img{
         width: 130px;
     }
-   
+    .burger-icon{
+        font-size: 30px;
+        color: white;
+        &:hover{
+            color: yellow;
+        }
+    }
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 .10rem;
+        color: white;
+    }
     .castle{
         text-align: center;
         width: 25%;
