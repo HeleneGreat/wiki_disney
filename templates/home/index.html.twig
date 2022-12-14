@@ -4,11 +4,11 @@
 
 {% block body %}
 
-<section>
-    <div class="top_page">
+<section id="home" class="container">
+    <div class="top_page col-12 col-lg-7">
         <h1>Bienvenue sur Wiki Disney !</h1>
         <h2>L'encyclopédie développée par une communauté de passionnés.</h2>
-        <div class="ligne" style=""></div>
+        <hr>
 
         <div class="text_page">
             <p>Nous vous souhaitons énormément de succès et de plaisir sur le Wiki Disney !<br>
@@ -24,35 +24,40 @@
         </div>
     </div>
 
-    <section class="container">
-        <div class="titre"><h1>Articles les plus consulté</h1><h1>Catégories les plus consulté</h1></div>
-        <div class="row g-4">
-            {% for article in mixed_articles %}
-                <div class="col-6 col-md-3 h-100">
+    <article>
+        <h2>Laissez-vous guider par la magie des Disney et découvrez...</h2>
+        <div class="row g-4 justify-content-between mt-3">
+            <div class="col-12 col-lg-6 row">
+                <p class="col-12 title">Nos articles</p>
+                {% for article in mixed_articles %}
+                <div class="col-6 h-100">
                     <a href="{{path('one_article', {articleId:article.id})}}">
                         <div class="card">
-                            <img src="{{asset('images/')}}{{article.picture}}" class="card-img-top" alt="{{article.title}}">
+                            <img src="{{asset('uploads/articles/')}}{{article.image}}" class="card-img-top" alt="{{article.title}}">
                             <div class="card-body">
                                 <h2 class="card-title">{{article.title}}</h2>
                             </div>
                         </div>
                     </a>
                 </div>
-            {% endfor %}
-            
-            {% for category in mixed_cats %}
-                <div class="col-6 col-md-3">
-                    <a href="{{path('one_category', {categoryId:category.id})}}">
-                        <div class="card">
-                            <img src="https://cdn.pixabay.com/photo/2022/10/15/14/55/ornamental-plant-7523304_960_720.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h2 class="card-title">{{category.name}}</h2>
+                {% endfor %}
+            </div>
+            <div class="col-12 col-lg-6 row">
+                <p class="col-12 title">Nos catégories</p>
+                {% for category in mixed_cats %}
+                    <div class="col-6">
+                        <a href="{{path('one_category', {categoryId:category.id})}}">
+                            <div class="card">
+                                <img src="{{asset('uploads/categories/')}}{{category.image}}" class="card-img-top category" alt="...">
+                                <div class="card-body">
+                                    <h2 class="card-title">{{category.name}}</h2>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div> 
-    </section>
+    </article>
 </section>
 {% endblock %}
