@@ -16,9 +16,6 @@ class BackofficeController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         if($this->getUser()){
-            // User must be registered to access this page
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-
         $userEmail = $this->getUser()->getUserIdentifier();
         $userId = $doctrine->getRepository(User::class)->findOneBy(['email' => $userEmail])->getId();
 
@@ -39,10 +36,7 @@ class BackofficeController extends AbstractController
     #[Route('/mesinfos', name: 'mesinfos')]
     public function afficheMesInfos(): Response
     {
-        if($this->getUser()){
-             // User must be registered to access this page
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-        
+        if($this->getUser()){        
         return $this->render('backoffice/mesinfos.html.twig');
         }else{
             $this->addFlash(
