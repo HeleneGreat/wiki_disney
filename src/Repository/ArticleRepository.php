@@ -54,6 +54,17 @@ class ArticleRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+   public function twoRandomArticles(): array
+   {
+       return $this->createQueryBuilder('a')
+           ->select('a.id')
+           ->orderBy('RAND()')
+           ->setMaxResults(2)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 //    public function findOneBySomeField($value): ?Article
 //    {
 //        return $this->createQueryBuilder('a')
