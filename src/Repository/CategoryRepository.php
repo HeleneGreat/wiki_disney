@@ -39,6 +39,17 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function twoRandomCategories(): array
+   {
+       return $this->createQueryBuilder('c')
+           ->select('c.id')
+           ->orderBy('RAND()')
+           ->setMaxResults(2)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

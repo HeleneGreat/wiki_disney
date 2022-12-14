@@ -9,7 +9,6 @@
         <h1>Bienvenue sur Wiki Disney !</h1>
         <h2>L'encyclopédie développée par une communauté de passionnés.</h2>
         <hr>
-
         <div class="text_page">
             <p>Nous vous souhaitons énormément de succès et de plaisir sur le Wiki Disney !</p>
             <p>Votre connaissance du monde Disney nous sera d'un grand recours :</p>
@@ -23,13 +22,12 @@
             <p>— L'équipe du Wiki Disney.</p>
         </div>
     </div>
-
     <article>
         <h2 class="my-5">Laissez-vous guider par la magie des Disney et découvrez...</h2>
         <div class="row g-4 justify-content-between mt-3">
             <div class="col-12 col-lg-6 row">
                 <p class="col-12 title">Nos articles</p>
-                {% for article in mixed_articles %}
+                {% for article in random_articles %}
                 <div class="col-6 h-100">
                     <a href="{{path('one_article', {articleId:article.id})}}">
                         <div class="card">
@@ -44,7 +42,7 @@
             </div>
             <div class="col-12 col-lg-6 row">
                 <p class="col-12 title">Nos catégories</p>
-                {% for category in mixed_cats %}
+                {% for category in random_categories %}
                     <div class="col-6">
                         <a href="{{path('one_category', {categoryId:category.id})}}">
                             <div class="card">
