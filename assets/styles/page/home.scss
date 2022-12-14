@@ -1,0 +1,42 @@
+.top_page {
+    text-align: center;
+    background-color: grey;
+    border-radius: 5px;
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid white;
+}
+
+.ligne {
+    border-bottom: 2px solid black;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.text_page {
+    font-size: 16px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.container {
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.titre {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_text {
+    list-style-type: disc;
+}
+
+.li_text {
+    width: 65%;
+}

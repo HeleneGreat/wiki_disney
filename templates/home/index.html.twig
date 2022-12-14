@@ -5,8 +5,54 @@
 {% block body %}
 
 <section>
-    <h1>Bienvenue sur Wiki Disney !</h1>
+    <div class="top_page">
+        <h1>Bienvenue sur Wiki Disney !</h1>
+        <h2>L'encyclopédie développée par une communauté de passionnés.</h2>
+        <div class="ligne" style=""></div>
 
-  
+        <div class="text_page">
+            <p>Nous vous souhaitons énormément de succès et de plaisir sur le Wiki Disney !<br>
+            Votre connaissance du monde Disney nous sera d'un grand recours.<br>
+            <ul class="list_text">
+                <li class="li_text">Pour en connaître un peu plus sur le fonctionnement d'un wiki, vous avez la possibilité de vous adresser à un membre du wiki sur sa page de discussion ou de vous rendre sur le Centre des Communautés.</li>
+                <li>Afin de connaître le fonctionnement du wiki.</li>
+                <li>Enfin, pour vous familiariser avec votre profil et votre page de discussion.</li>
+            </ul>
+            Nous espérons de tout cœur que vous deviendrez l'un de nos plus talentueux rédacteurs !<br><br>
+            
+            — L'équipe du Wiki Disney.</p>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="titre"><h1>Articles les plus consulté</h1><h1>Catégories les plus consulté</h1></div>
+        <div class="row g-4">
+            {% for article in mixed_articles %}
+                <div class="col-6 col-md-3 h-100">
+                    <a href="{{path('one_article', {articleId:article.id})}}">
+                        <div class="card">
+                            <img src="{{asset('images/')}}{{article.picture}}" class="card-img-top" alt="{{article.title}}">
+                            <div class="card-body">
+                                <h2 class="card-title">{{article.title}}</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            
+            {% for category in mixed_cats %}
+                <div class="col-6 col-md-3">
+                    <a href="{{path('one_category', {categoryId:category.id})}}">
+                        <div class="card">
+                            <img src="https://cdn.pixabay.com/photo/2022/10/15/14/55/ornamental-plant-7523304_960_720.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h2 class="card-title">{{category.name}}</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div> 
+    </section>
 </section>
 {% endblock %}
