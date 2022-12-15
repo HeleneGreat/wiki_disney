@@ -1,0 +1,44 @@
+textarea{
+    &#article_summary{
+        height: 130px;
+    }
+    &#article_content{
+        height: 300px;
+    }
+}
+label, legend{
+    color: $error;
+    font-weight: 600;
+}
+label.form-check-label{
+    font-weight: normal;
+}
+.form-check-input:checked {
+    background-color: $error;
+    border-color: $error;
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem fade-out($error, .6);
+}
+.form-check-input:checked:focus {
+    border-color: $error;
+}
+.form-check-input:active ~ .custom-control-label::before {
+    background-color: $error; 
+}
+
+.w-50{
+    @media (max-width:992px){
+        width: 100%!important;
+    }
+}
+
+.flash-error{
+    a{
+        color: $banner;
+        display: block;
+        &:hover{
+            color: $castel;
+        }
+    }
+}
