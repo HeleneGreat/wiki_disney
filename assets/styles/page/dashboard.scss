@@ -7,6 +7,10 @@
             height: 112px;
             width: 112px;
             object-fit: cover;
+            display: none;
+            @include media-breakpoint-up(md){
+                display: block;
+            }
         }
         .btn{
             padding: 5px 10px;

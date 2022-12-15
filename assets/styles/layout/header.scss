@@ -1,10 +1,19 @@
 header{
     background-color: $banner;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+    @include media-breakpoint-up(lg){
+        margin-bottom: 40px;
+    }
     .baniere{
-        font-family: 'Mouse Memoirs', sans-serif;
-        font-size: 5em;
+        font-size: 3em;
         color: $title;
+        font-family: 'Mouse Memoirs', sans-serif;
+        @include media-breakpoint-up(lg){
+            font-size: 5em;
+        }
+        p{
+            margin: 0;
+        }
     }
     img{
         width: 130px;
@@ -38,12 +47,16 @@ header{
         }
         .dropdown-menu{
             color: #ffffffa3;
-            border-color: #ffffffa3;
             border-top: none;
             background-color: $bleu-fonce;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             margin-top: 8px;
+            border-color: transparent;
+            @include media-breakpoint-up(lg){
+                border-color: #ffffffa3;
+
+            }
         }
     }
 
