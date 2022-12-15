@@ -27,9 +27,9 @@ class BackofficeController extends AbstractController
         }else{
             $this->addFlash(
                 "error",
-                "Vous n'avez pas les droits pour effectuer cette action"
+                "Vous devez être connecté pour accéder à cette page"
             );
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_login');
         }
         
     }
@@ -41,9 +41,9 @@ class BackofficeController extends AbstractController
         }else{
             $this->addFlash(
                     "error",
-                    "Vous n'avez pas les droits pour effectuer cette action"
+                    "Vous devez être connecté pour accéder à cette page"
                 );
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('app_login');
         }
        
     }

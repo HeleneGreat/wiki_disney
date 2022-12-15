@@ -25,7 +25,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -35,8 +34,10 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
-
+            $this->addFlash(
+                "notice",
+                "Félicitations, votre compte a bien été créé ! Vous pouvez dès à présent rajouter des articles et ainsi participer à la vie de notre wiki."
+            );
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
@@ -62,7 +63,6 @@ class RegistrationController extends AbstractController
         // Walt
         $walt = new User();
         $walt->setPseudo('Walt');
-        $walt->setImage('walt.png');
         $walt->setEmail('walt@disney.com');
         $walt->setPassword($userPasswordHasher->hashPassword($walt, '123456'));
         $entityManager->persist($walt);
@@ -70,7 +70,6 @@ class RegistrationController extends AbstractController
         // Edith
         $edith = new User();
         $edith->setPseudo('Edith');
-        $edith->setImage('edith.png');
         $edith->setEmail('edith@disney.com');
         $edith->setPassword($userPasswordHasher->hashPassword($edith, '123456'));
         $entityManager->persist($edith);

@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez  accepter les termes RGPD.',
                     ]),
                 ],
-                'label' => 'En m\'inscrivant sur ce site, j\'accepte que mes données [...]'
+                'label' => 'En m\'inscrivant sur ce site, j\'accepte que mes données personnelles transmises par ce formulaire soient conservées par le site Wiki Disney'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,

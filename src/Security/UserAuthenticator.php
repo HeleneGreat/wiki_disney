@@ -46,9 +46,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // TODO: remplacer article_list par la page d'accueil une fois créee
-        return new RedirectResponse($this->urlGenerator->generate('article_list'));
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('dashboard'));
     }
 
     protected function getLoginUrl(Request $request): string

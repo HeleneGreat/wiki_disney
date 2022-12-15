@@ -56,14 +56,12 @@
                         <tr>
                             <th class="col-4">Auteur</th>
                             <td><span>
-                                {# TODO : ajouter lien vers la page avec la liste de tous les articles écrits par ce user quand la route aura été créée #}
-                                <a href="">
                                     {% if article.author.id > 0 %}
                                         {{article.author.pseudo}}
                                     {% else %}
                                         Auteur inconnu
                                     {% endif %}
-                                </a></span>
+                                </span>
                             </td>
                         </tr>
                     </table>
