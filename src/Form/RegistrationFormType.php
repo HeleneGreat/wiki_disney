@@ -31,12 +31,6 @@ class RegistrationFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('image', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'label' => 'Photo de profil'
-            ])
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -44,7 +38,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez  accepter les termes RGPD.',
                     ]),
                 ],
-                'label' => 'En m\'inscrivant sur ce site, j\'accepte que mes données.... BLAH BLAH TO DO'
+                'label' => 'En m\'inscrivant sur ce site, j\'accepte que mes données [...]'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
