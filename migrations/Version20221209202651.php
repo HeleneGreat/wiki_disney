@@ -22,7 +22,7 @@ final class Version20221209202651 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE article ADD image VARCHAR(255) NOT NULL');
         // $this->addSql('ALTER TABLE article ADD CONSTRAINT FK_23A0E66F675F31B FOREIGN KEY (author_id) REFERENCES user (id)');
-        $this->addSql('CREATE INDEX IDX_23A0E66F675F31B ON article (author_id)');
+        // $this->addSql('CREATE INDEX IDX_23A0E66F675F31B ON article (author_id)');
     }
 
     public function down(Schema $schema): void
